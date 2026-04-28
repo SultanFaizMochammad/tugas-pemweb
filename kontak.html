@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sultan Faiz Mochammad — Kontak</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:     #0f1117;
+      --ink:    #e2e4ec;
+      --yellow: #5b8dee;
+      --red:    #e8956d;
+      --border: 2px solid #2a2d3a;
+      --surface: #1a1d27;
+      --muted:  #8b90a7;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Mono', monospace;
+      background: #0f1117;
+      color: #e2e4ec;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: var(--border);
+      background: #5b8dee;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.12em;
+      padding: 14px 28px;
+      border-right: var(--border);
+    }
+
+    .nav-tagline {
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      padding: 0 28px;
+      flex: 1;
+      opacity: 0.6;
+    }
+
+    .nav-pages { display: flex; }
+
+    .nav-pages a {
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 16px 20px;
+      border-left: var(--border);
+      color: #e2e4ec;
+      opacity: 0.45;
+      transition: background 0.15s, opacity 0.15s;
+    }
+
+    .nav-pages a.active {
+      background: #5b8dee;
+      color: #0f1117;
+      opacity: 1;
+    }
+
+    .nav-pages a:hover:not(.active) {
+      background: rgba(255,255,255,0.04);
+      opacity: 0.8;
+    }
+
+    /* ── HERO ── */
+    .hero-band {
+      border-bottom: var(--border);
+      padding: 60px 48px 52px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 60px;
+      align-items: end;
+      background: #1a1d27;
+    }
+
+    .hero-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      opacity: 0.45;
+      color: #5b8dee;
+      animation: fadeIn 0.5s ease both 0.1s;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 9vw, 10rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      color: var(--bg);
+      animation: fadeIn 0.5s ease both 0.15s;
+    }
+
+    .hero-title .accent { color: #5b8dee; }
+
+    .hero-right-block {
+      max-width: 340px;
+      animation: fadeIn 0.5s ease both 0.25s;
+    }
+
+    .hero-desc {
+      font-size: 0.75rem;
+      line-height: 1.8;
+      opacity: 0.6;
+      margin-bottom: 28px;
+      color: var(--bg);
+    }
+
+    /* ── CONTACT CHANNELS ── */
+    .channels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: var(--border);
+    }
+
+    .channel-cell {
+      padding: 48px;
+      border-right: var(--border);
+      transition: background 0.2s;
+      animation: fadeIn 0.5s ease both;
+      text-decoration: none;
+      color: #e2e4ec;
+      display: block;
+    }
+
+    .channel-cell:nth-child(1) { animation-delay: 0.1s; }
+    .channel-cell:nth-child(2) { animation-delay: 0.2s; }
+    .channel-cell:nth-child(3) { animation-delay: 0.3s; border-right: none; }
+
+    .channel-cell:hover { background: #1e2233; }
+
+    .channel-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .channel-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 8px;
+    }
+
+    .channel-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .channel-sub {
+      font-size: 0.62rem;
+      opacity: 0.45;
+    }
+
+    .channel-arrow {
+      display: block;
+      margin-top: 20px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── FORM SECTION ── */
+    .form-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: var(--border);
+    }
+
+    .form-left {
+      padding: 52px 48px;
+      border-right: var(--border);
+    }
+
+    .form-right {
+      padding: 52px 48px;
+      background: #1a1d27;
+    }
+
+    .section-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.45;
+      margin-bottom: 24px;
+    }
+
+    .form-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .form-intro {
+      font-size: 0.72rem;
+      line-height: 1.9;
+      opacity: 0.6;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.45;
+      margin-bottom: 8px;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: var(--border);
+      background: #1a1d27;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: #e2e4ec;
+      outline: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      border-color: var(--red);
+      background: #212435;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: #1a1d27;
+      color: #5b8dee;
+      border: var(--border);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-submit:hover { background: #1e1a15; border-color: var(--red); }
+
+    /* ── AVAILABILITY ── */
+    .avail-band {
+      background: var(--surface);
+      border-bottom: var(--border);
+      border-top: 3px solid #5b8dee;
+      padding: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .avail-left .avail-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 12px;
+    }
+
+    .avail-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .avail-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #1e1a15;
+      margin-right: 10px;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .avail-right {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .avail-item {
+      padding: 16px 24px;
+      border: var(--border);
+      background: #1a1d27;
+      color: #5b8dee;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 48px;
+      background: #1a1d27;
+    }
+
+    .footer-text {
+      font-size: 0.6rem;
+      color: rgba(91,141,238,0.35);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      color: #5b8dee;
+      letter-spacing: 0.2em;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-band { grid-template-columns: 1fr; }
+      .channels-grid { grid-template-columns: 1fr; }
+      .channel-cell { border-right: none; border-bottom: var(--border); }
+      .form-section { grid-template-columns: 1fr; }
+      .form-left { border-right: none; border-bottom: var(--border); }
+      .avail-band { flex-direction: column; align-items: flex-start; }
+      .nav-tagline { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">SF</div>
+    <p class="nav-tagline">// PORTFOLIO PERSONAL · MAHASISWA TEKNIK INFORMATIKA</p>
+    <div class="nav-pages">
+      <a href="index.html">01</a>
+      <a href="portofolio.html">02</a>
+      <a href="kontak.html" class="active">03</a>
+    </div>
+  </nav>
+
+  <!-- HERO (dark bg) -->
+  <section class="hero-band">
+    <div>
+      <p class="hero-label">// Kontak · Mari Terhubung</p>
+      <h1 class="hero-title">HUBUNGI<br><span class="accent">SAYA.</span></h1>
+    </div>
+    <div class="hero-right-block">
+      <p class="hero-desc">
+        Punya proyek menarik? Butuh kolaborasi? Atau sekadar ingin ngobrol
+        soal teknologi? Jangan ragu untuk menghubungi saya. Saya selalu
+        terbuka untuk kesempatan baru.
+      </p>
+    </div>
+  </section>
+
+  <!-- CHANNELS -->
+  <section class="channels-grid">
+    <a href="mailto:sultanfaiz@email.com" class="channel-cell">
+      <div class="channel-icon">✉️</div>
+      <p class="channel-label">// Email</p>
+      <div class="channel-value">Sultan.Faiz</div>
+      <p class="channel-sub">@email.com</p>
+      <span class="channel-arrow">Kirim Email →</span>
+    </a>
+    <a href="https://github.com/sultanfaiz" target="_blank" class="channel-cell">
+      <div class="channel-icon">💻</div>
+      <p class="channel-label">// GitHub</p>
+      <div class="channel-value">@SultanFaiz</div>
+      <p class="channel-sub">Lihat source code saya</p>
+      <span class="channel-arrow">Buka GitHub →</span>
+    </a>
+    <a href="https://linkedin.com/in/sultanfaiz" target="_blank" class="channel-cell">
+      <div class="channel-icon">🔗</div>
+      <p class="channel-label">// LinkedIn</p>
+      <div class="channel-value">Sultan Faiz Mochammad</div>
+      <p class="channel-sub">Professional network</p>
+      <span class="channel-arrow">Lihat Profil →</span>
+    </a>
+  </section>
+
+  <!-- FORM -->
+  <section class="form-section">
+    <div class="form-left">
+      <p class="section-tag">// Kirim Pesan</p>
+      <h2 class="form-title">TULIS<br>PESAN<br>ANDA.</h2>
+      <p class="form-intro">
+        Isi form di samping dan saya akan membalas dalam
+        1–2 hari kerja. Semua pesan saya baca dengan serius.
+      </p>
+    </div>
+    <div class="form-right">
+      <p class="section-tag">// Form Kontak</p>
+      <div class="form-group">
+        <label class="form-label" for="nama">// Nama Lengkap</label>
+        <input class="form-input" type="text" id="nama" placeholder="Nama kamu..."/>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="email">// Email</label>
+        <input class="form-input" type="email" id="email" placeholder="email@contoh.com"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="subjek">// Subjek</label>
+        <input class="form-input" type="text" id="subjek" placeholder="Topik pesan..."/>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="pesan">// Pesan</label>
+        <textarea class="form-textarea" id="pesan" placeholder="Tulis pesanmu di sini..."></textarea>
+      </div>
+      <button class="btn-submit" onclick="kirimPesan()">Kirim Pesan →</button>
+    </div>
+  </section>
+
+  <!-- AVAILABILITY -->
+  <section class="avail-band">
+    <div class="avail-left">
+      <p class="avail-tag">// Status Ketersediaan</p>
+      <div class="avail-headline">
+        <span class="avail-dot"></span>TERSEDIA UNTUK KOLABORASI
+      </div>
+    </div>
+    <div class="avail-right">
+      <div class="avail-item">Freelance</div>
+      <div class="avail-item">Magang</div>
+      <div class="avail-item">Open Source</div>
+      <div class="avail-item">Diskusi Proyek</div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="footer-text">© 2025 SULTAN FAIZ MOCHAMMAD · TEKNIK INFORMATIKA</p>
+    <div class="footer-logo">SF</div>
+  </footer>
+
+  <script>
+    function kirimPesan() {
+      const nama = document.getElementById('nama').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const pesan = document.getElementById('pesan').value.trim();
+
+      if (!nama || !email || !pesan) {
+        alert('Mohon isi semua field yang wajib diisi.');
+        return;
+      }
+
+      const btn = document.querySelector('.btn-submit');
+      btn.textContent = '✓ Pesan Terkirim!';
+      btn.style.background = '#4ade80';
+      btn.style.borderColor = '#4ade80';
+      btn.style.color = '#111';
+
+      setTimeout(() => {
+        btn.textContent = 'Kirim Pesan →';
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        btn.style.color = '';
+        document.getElementById('nama').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('subjek').value = '';
+        document.getElementById('pesan').value = '';
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>

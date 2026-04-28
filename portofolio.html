@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sultan Faiz Mochammad — Portofolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:     #0f1117;
+      --ink:    #e2e4ec;
+      --yellow: #5b8dee;
+      --red:    #e8956d;
+      --border: 2px solid #2a2d3a;
+      --surface: #1a1d27;
+      --muted:  #8b90a7;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Mono', monospace;
+      background: #0f1117;
+      color: #e2e4ec;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: var(--border);
+      background: #5b8dee;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.12em;
+      padding: 14px 28px;
+      border-right: var(--border);
+    }
+
+    .nav-tagline {
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      padding: 0 28px;
+      flex: 1;
+      opacity: 0.6;
+    }
+
+    .nav-pages { display: flex; }
+
+    .nav-pages a {
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 16px 20px;
+      border-left: var(--border);
+      color: #e2e4ec;
+      opacity: 0.45;
+      transition: background 0.15s, opacity 0.15s;
+    }
+
+    .nav-pages a.active {
+      background: #5b8dee;
+      color: #0f1117;
+      opacity: 1;
+    }
+
+    .nav-pages a:hover:not(.active) {
+      background: rgba(255,255,255,0.04);
+      opacity: 0.8;
+    }
+
+    /* ── HERO ── */
+    .hero-band {
+      border-bottom: var(--border);
+      padding: 60px 48px 52px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 60px;
+      align-items: end;
+    }
+
+    .hero-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      opacity: 0.45;
+      animation: fadeIn 0.5s ease both 0.1s;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 9vw, 10rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      animation: fadeIn 0.5s ease both 0.15s;
+    }
+
+    .hero-title .accent { color: var(--red); }
+
+    .hero-right-block {
+      max-width: 340px;
+      animation: fadeIn 0.5s ease both 0.25s;
+    }
+
+    .hero-desc {
+      font-size: 0.75rem;
+      line-height: 1.8;
+      opacity: 0.6;
+      margin-bottom: 28px;
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: var(--border);
+    }
+
+    .stat-cell {
+      padding: 40px 48px;
+      border-right: var(--border);
+      transition: background 0.2s;
+      animation: fadeIn 0.5s ease both;
+    }
+
+    .stat-cell:nth-child(1) { animation-delay: 0.2s; }
+    .stat-cell:nth-child(2) { animation-delay: 0.3s; }
+    .stat-cell:nth-child(3) { animation-delay: 0.4s; border-right: none; }
+
+    .stat-cell:hover { background: #5b8dee; }
+
+    .stat-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 1;
+    }
+
+    .stat-value .plus { color: var(--red); }
+
+    .stat-sub {
+      font-size: 0.62rem;
+      opacity: 0.45;
+      margin-top: 6px;
+    }
+
+    /* ── PROJECT GRID ── */
+    .projects-header {
+      padding: 40px 48px;
+      border-bottom: var(--border);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .projects-header-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.06em;
+    }
+
+    .projects-header-sub {
+      font-size: 0.6rem;
+      opacity: 0.4;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-bottom: var(--border);
+    }
+
+    .project-card {
+      padding: 48px;
+      border-right: var(--border);
+      border-bottom: var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s;
+      animation: fadeIn 0.6s ease both;
+      text-decoration: none;
+      color: #e2e4ec;
+      display: block;
+    }
+
+    .project-card:nth-child(2) { border-right: none; }
+    .project-card:nth-child(3) { border-bottom: none; }
+    .project-card:nth-child(4) { border-right: none; border-bottom: none; }
+    .project-card:nth-child(1) { animation-delay: 0.1s; }
+    .project-card:nth-child(2) { animation-delay: 0.2s; }
+    .project-card:nth-child(3) { animation-delay: 0.3s; }
+    .project-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .project-card:hover { background: #5b8dee; }
+
+    .project-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      line-height: 1;
+      opacity: 0.07;
+      position: absolute;
+      top: 20px;
+      right: 32px;
+      letter-spacing: -0.02em;
+    }
+
+    .project-tag {
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 14px;
+    }
+
+    .project-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+      line-height: 1.05;
+    }
+
+    .project-desc {
+      font-size: 0.7rem;
+      line-height: 1.8;
+      opacity: 0.6;
+      margin-bottom: 24px;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .stack-tag {
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      padding: 5px 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+      text-transform: uppercase;
+    }
+
+    .project-arrow {
+      position: absolute;
+      bottom: 32px;
+      right: 32px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--red);
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-section {
+      border-bottom: var(--border);
+    }
+
+    .exp-header {
+      padding: 40px 48px;
+      border-bottom: var(--border);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .exp-header-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.06em;
+    }
+
+    .exp-list { }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 180px 1fr auto;
+      gap: 40px;
+      align-items: baseline;
+      padding: 32px 48px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      transition: background 0.2s;
+    }
+
+    .exp-item:last-child { border-bottom: none; }
+    .exp-item:hover { background: rgba(91,141,238,0.06); }
+
+    .exp-period {
+      font-size: 0.62rem;
+      opacity: 0.4;
+      letter-spacing: 0.08em;
+    }
+
+    .exp-role {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.04em;
+    }
+
+    .exp-place {
+      font-size: 0.62rem;
+      opacity: 0.45;
+      margin-top: 4px;
+    }
+
+    .exp-badge {
+      font-size: 0.55rem;
+      padding: 5px 12px;
+      background: #1a1d27;
+      color: #5b8dee;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 48px;
+      background: #1a1d27;
+    }
+
+    .footer-text {
+      font-size: 0.6rem;
+      color: rgba(91,141,238,0.35);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      color: #5b8dee;
+      letter-spacing: 0.2em;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-band { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: 1fr; }
+      .stat-cell { border-right: none; border-bottom: var(--border); }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card { border-right: none !important; }
+      .exp-item { grid-template-columns: 1fr; gap: 8px; }
+      .nav-tagline { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">SF</div>
+    <p class="nav-tagline">// PORTFOLIO PERSONAL · MAHASISWA TEKNIK INFORMATIKA</p>
+    <div class="nav-pages">
+      <a href="index.html">01</a>
+      <a href="portofolio.html" class="active">02</a>
+      <a href="kontak.html">03</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-band">
+    <div>
+      <p class="hero-label">// Portofolio · Proyek & Pengalaman</p>
+      <h1 class="hero-title">KARYA<br>TERBAIK<span class="accent">KU.</span></h1>
+    </div>
+    <div class="hero-right-block">
+      <p class="hero-desc">
+        Kumpulan proyek dan pengalaman yang mencerminkan perjalanan belajar saya
+        di dunia teknologi. Setiap proyek adalah bukti bahwa belajar tidak
+        pernah berhenti.
+      </p>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-bar">
+    <div class="stat-cell">
+      <p class="stat-tag">// Total Proyek</p>
+      <div class="stat-value">8<span class="plus">+</span></div>
+      <p class="stat-sub">Proyek selesai dikerjakan</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-tag">// Teknologi</p>
+      <div class="stat-value">12</div>
+      <p class="stat-sub">Stack yang pernah dipakai</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-tag">// Jam Coding</p>
+      <div class="stat-value">500<span class="plus">+</span></div>
+      <p class="stat-sub">Jam belajar & pengerjaan</p>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section>
+    <div class="projects-header">
+      <p class="projects-header-title">// Proyek Unggulan</p>
+      <p class="projects-header-sub">2023 — 2025</p>
+    </div>
+    <div class="projects-grid">
+      <a href="#" class="project-card">
+        <div class="project-num">01</div>
+        <p class="project-tag">// Web Development</p>
+        <h3 class="project-title">Sistem Absensi Digital</h3>
+        <p class="project-desc">
+          Aplikasi web untuk manajemen absensi mahasiswa dengan fitur QR code,
+          dashboard admin, dan laporan otomatis. Dibuat sebagai proyek akhir
+          mata kuliah Pemrograman Web.
+        </p>
+        <div class="project-stack">
+          <span class="stack-tag">HTML</span>
+          <span class="stack-tag">CSS</span>
+          <span class="stack-tag">JavaScript</span>
+          <span class="stack-tag">PHP</span>
+          <span class="stack-tag">MySQL</span>
+        </div>
+        <div class="project-arrow">→</div>
+      </a>
+
+      <a href="#" class="project-card">
+        <div class="project-num">02</div>
+        <p class="project-tag">// UI/UX Design</p>
+        <h3 class="project-title">App Kantin Kampus</h3>
+        <p class="project-desc">
+          Desain UI untuk aplikasi pemesanan makanan di kantin kampus.
+          Fitur meliputi menu digital, sistem antrian, dan pembayaran
+          QRIS. Prototype dibuat di Figma.
+        </p>
+        <div class="project-stack">
+          <span class="stack-tag">Figma</span>
+          <span class="stack-tag">UI Design</span>
+          <span class="stack-tag">Prototyping</span>
+        </div>
+        <div class="project-arrow">→</div>
+      </a>
+
+      <a href="#" class="project-card">
+        <div class="project-num">03</div>
+        <p class="project-tag">// Data & Visualisasi</p>
+        <h3 class="project-title">Dashboard Nilai Akademik</h3>
+        <p class="project-desc">
+          Dashboard interaktif untuk memvisualisasikan data nilai mahasiswa
+          per semester. Menggunakan Chart.js untuk grafik dan CSS Grid
+          untuk layout responsif.
+        </p>
+        <div class="project-stack">
+          <span class="stack-tag">HTML</span>
+          <span class="stack-tag">CSS Grid</span>
+          <span class="stack-tag">Chart.js</span>
+          <span class="stack-tag">Python</span>
+        </div>
+        <div class="project-arrow">→</div>
+      </a>
+
+      <a href="#" class="project-card">
+        <div class="project-num">04</div>
+        <p class="project-tag">// Automation</p>
+        <h3 class="project-title">Bot Jadwal Kuliah</h3>
+        <p class="project-desc">
+          Bot Telegram yang mengirim notifikasi jadwal kuliah otomatis
+          setiap pagi. Dibuat dengan Python dan di-deploy di server gratis
+          menggunakan Railway.
+        </p>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">Telegram API</span>
+          <span class="stack-tag">Railway</span>
+        </div>
+        <div class="project-arrow">→</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="exp-section">
+    <div class="exp-header">
+      <p class="exp-header-title">// Pengalaman & Organisasi</p>
+    </div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-period">2024 — Sekarang</span>
+        <div>
+          <div class="exp-role">Anggota FOSTI</div>
+          <p class="exp-place">Forum Studi Teknologi Informasi — UMS</p>
+        </div>
+        <span class="exp-badge">Aktif</span>
+      </div>
+      <div class="exp-item">
+        <span class="exp-period">2024</span>
+        <div>
+          <div class="exp-role">Panitia Lomba FostiFest</div>
+          <p class="exp-place">Festival Teknologi Informasi — FOSTI UMS</p>
+        </div>
+        <span class="exp-badge">Kepanitiaan</span>
+      </div>
+      <div class="exp-item">
+        <span class="exp-period">2024</span>
+        <div>
+          <div class="exp-role">Peserta Lomba Catur</div>
+          <p class="exp-place">Ikatan Mahasiswa Muhammadiyah (IMM)</p>
+        </div>
+        <span class="exp-badge">Kompetisi</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="footer-text">© 2025 AHMAD RIZKY · TEKNIK INFORMATIKA</p>
+    <div class="footer-logo">SF</div>
+  </footer>
+
+</body>
+</html>

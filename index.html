@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sultan Faiz Mochammad — Beranda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:     #0f1117;
+      --ink:    #e2e4ec;
+      --yellow: #5b8dee;
+      --red:    #e8956d;
+      --border: 2px solid #2a2d3a;
+      --surface: #1a1d27;
+      --muted:  #8b90a7;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Mono', monospace;
+      background: #0f1117;
+      color: #e2e4ec;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: var(--border);
+      background: #5b8dee;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.12em;
+      padding: 14px 28px;
+      border-right: var(--border);
+    }
+
+    .nav-tagline {
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      padding: 0 28px;
+      flex: 1;
+      opacity: 0.6;
+    }
+
+    .nav-pages {
+      display: flex;
+    }
+
+    .nav-pages a {
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 16px 20px;
+      border-left: var(--border);
+      color: #e2e4ec;
+      opacity: 0.45;
+      transition: background 0.15s, opacity 0.15s;
+    }
+
+    .nav-pages a.active {
+      background: #5b8dee;
+      color: #0f1117;
+      opacity: 1;
+    }
+
+    .nav-pages a:hover:not(.active) {
+      background: rgba(255,255,255,0.04);
+      opacity: 0.8;
+    }
+
+    /* ── HERO ── */
+    .hero-band {
+      border-bottom: var(--border);
+      padding: 60px 48px 52px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 60px;
+      align-items: end;
+    }
+
+    .hero-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      opacity: 0.45;
+      animation: fadeIn 0.5s ease both 0.1s;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 9vw, 10rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      animation: fadeIn 0.5s ease both 0.15s;
+    }
+
+    .hero-title .accent { color: var(--red); }
+
+    .hero-right-block {
+      max-width: 340px;
+      animation: fadeIn 0.5s ease both 0.25s;
+    }
+
+    .hero-desc {
+      font-size: 0.75rem;
+      line-height: 1.8;
+      opacity: 0.6;
+      margin-bottom: 28px;
+    }
+
+    .btn-action {
+      display: inline-block;
+      background: #1a1d27;
+      color: #5b8dee;
+      padding: 14px 32px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: var(--border);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-action:hover { background: #1e1a15; border-color: var(--red); }
+
+    /* ── ABOUT BAND ── */
+    .about-band {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: var(--border);
+    }
+
+    .about-left {
+      padding: 52px 48px;
+      border-right: var(--border);
+    }
+
+    .about-right {
+      padding: 52px 48px;
+      background: #1a1d27;
+      color: #5b8dee;
+    }
+
+    .section-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.45;
+      margin-bottom: 20px;
+    }
+
+    .about-right .section-tag { opacity: 0.5; }
+
+    .about-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+    }
+
+    .about-right .about-title { color: #5b8dee; }
+
+    .about-text {
+      font-size: 0.75rem;
+      line-height: 1.9;
+      opacity: 0.65;
+    }
+
+    .about-right .about-text { color: #5b8dee; opacity: 0.7; }
+
+    /* ── SKILLS GRID ── */
+    .skills-section {
+      border-bottom: var(--border);
+    }
+
+    .skills-header {
+      padding: 40px 48px 32px;
+      border-bottom: var(--border);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .skills-header-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.06em;
+    }
+
+    .skills-header-sub {
+      font-size: 0.6rem;
+      opacity: 0.4;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .skill-cell {
+      padding: 36px 32px;
+      border-right: var(--border);
+      transition: background 0.2s;
+      animation: fadeIn 0.5s ease both;
+    }
+
+    .skill-cell:nth-child(1) { animation-delay: 0.1s; }
+    .skill-cell:nth-child(2) { animation-delay: 0.2s; }
+    .skill-cell:nth-child(3) { animation-delay: 0.3s; }
+    .skill-cell:nth-child(4) { animation-delay: 0.4s; border-right: none; }
+
+    .skill-cell:hover { background: #5b8dee; }
+
+    .skill-icon {
+      font-size: 1.6rem;
+      margin-bottom: 14px;
+    }
+
+    .skill-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .skill-desc {
+      font-size: 0.6rem;
+      opacity: 0.5;
+      line-height: 1.7;
+    }
+
+    /* ── QUOTE BAND ── */
+    .quote-band {
+      background: #1e1a15;
+      padding: 52px 48px;
+      border-bottom: var(--border);
+    }
+
+    .quote-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      color: var(--bg);
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+    }
+
+    .quote-source {
+      margin-top: 20px;
+      font-size: 0.65rem;
+      color: rgba(242,240,235,0.6);
+      letter-spacing: 0.15em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 48px;
+      background: #1a1d27;
+    }
+
+    .footer-text {
+      font-size: 0.6rem;
+      color: rgba(91,141,238,0.35);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      color: #5b8dee;
+      letter-spacing: 0.2em;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-band { grid-template-columns: 1fr; }
+      .about-band { grid-template-columns: 1fr; }
+      .about-left { border-right: none; border-bottom: var(--border); }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .skill-cell:nth-child(2) { border-right: none; }
+      .skill-cell:nth-child(4) { border-right: none; }
+      .skill-cell { border-bottom: var(--border); }
+      .nav-tagline { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">SF</div>
+    <p class="nav-tagline">// PORTFOLIO PERSONAL · MAHASISWA TEKNIK INFORMATIKA</p>
+    <div class="nav-pages">
+      <a href="index.html" class="active">01</a>
+      <a href="portofolio.html">02</a>
+      <a href="kontak.html">03</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-band">
+    <div>
+      <p class="hero-label">// Beranda · Teknik Informatika 2023</p>
+      <h1 class="hero-title">HALO,<br>SAYA <span class="accent">SULTAN.</span></h1>
+    </div>
+    <div class="hero-right-block">
+      <p class="hero-desc">
+        Mahasiswa Teknik Informatika yang passionate di bidang web development
+        dan UI/UX design. Saya membangun pengalaman digital yang bermakna
+        dan berdampak nyata bagi pengguna.
+      </p>
+      <a href="portofolio.html" class="btn-action">Lihat Portofolio →</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-band">
+    <div class="about-left">
+      <p class="section-tag">// Tentang Saya</p>
+      <h2 class="about-title">Siapa Saya?</h2>
+      <p class="about-text">
+        Nama saya Sultan Faiz Mochammad, biasa dipanggil Sultan. Mahasiswa semester 4 Teknik Informatika.
+        Saya tertarik pada pengembangan web modern, desain antarmuka yang
+        intuitif, dan pemecahan masalah melalui teknologi. Saya percaya
+        bahwa kode yang baik adalah kode yang bisa dibaca dan dipahami
+        oleh semua orang.
+      </p>
+    </div>
+    <div class="about-right">
+      <p class="section-tag">// Fakta Singkat</p>
+      <h2 class="about-title">Data Diri</h2>
+      <p class="about-text">
+        📍 Solo, Jawa Tengah<br><br>
+        🎓 Teknik Informatika — Semester 4<br><br>
+        💻 Focus: Frontend &amp; UI/UX<br><br>
+        🌐 Open for collaboration &amp; freelance
+      </p>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills-section">
+    <div class="skills-header">
+      <p class="skills-header-title">// Kemampuan Teknis</p>
+      <p class="skills-header-sub">Stack yang saya kuasai</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-cell">
+        <div class="skill-icon">🌐</div>
+        <div class="skill-name">HTML / CSS</div>
+        <p class="skill-desc">Markup semantik, Flexbox, Grid, animasi CSS, dan desain responsif.</p>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-icon">⚡</div>
+        <div class="skill-name">JavaScript</div>
+        <p class="skill-desc">ES6+, DOM manipulation, fetch API, dan logika interaktif.</p>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-icon">🐍</div>
+        <div class="skill-name">Python</div>
+        <p class="skill-desc">Scripting, data processing, dan dasar-dasar machine learning.</p>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-icon">🔧</div>
+        <div class="skill-name">Git / GitHub</div>
+        <p class="skill-desc">Version control, branching, pull request, dan GitHub Pages.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-band">
+    <p class="quote-text">"CODE IS POETRY.<br>BUILD THINGS THAT MATTER."</p>
+    <p class="quote-source">// PRINSIP KERJA · AHMAD RIZKY · 2025</p>
+  </section>
+
+  <footer>
+    <p class="footer-text">© 2025 AHMAD RIZKY · TEKNIK INFORMATIKA</p>
+    <div class="footer-logo">SF</div>
+  </footer>
+
+</body>
+</html>
